@@ -1,14 +1,5 @@
 export const API_URL = 'http://127.0.0.1:8000/api';
 
-export function CSRF_GET() {
-  return {
-    url: 'http://127.0.0.1:8000/sanctum/csrf-cookie',
-    options: {
-      method: 'GET',
-    },
-  };
-}
-
 export function REGISTRO(body) {
   return {
     url: API_URL + '/registrar',

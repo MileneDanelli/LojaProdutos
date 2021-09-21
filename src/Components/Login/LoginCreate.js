@@ -3,7 +3,7 @@ import Input from '../Forms/Input';
 import Button from '../Forms/Button';
 import Error from '../Helper/Error';
 import useForm from '../../Hooks/useForm';
-import { REGISTRO, CSRF_GET } from '../../api';
+import { REGISTRO } from '../../api';
 import { UserContext } from '../../UserContext';
 import useFetch from '../../Hooks/useFetch';
 import Head from '../Helper/Head';
@@ -18,38 +18,14 @@ const LoginCreate = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    //CSRF-TOKEN
-    let csrf_token;
-    csrf_token = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {
-      withCredentials: true,
+    const { url, options } = REGISTRO({
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      password_confirmation: password_confirmation.value,
     });
-
-    if (csrf_token.ok) {
-      let response;
-      response = await fetch('http://127.0.0.1:8000/api/registrar', {
-        withCredentials: true,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        'X-XSRF-TOKEN': document.cookie('XSRF-TOKEN'),
-        body: {
-          name: name.value,
-          email: email.value,
-          password: password.value,
-          password_confirmation: password_confirmation.value,
-        },
-      });
-      console.log(response);
-      // const { url, options } = REGISTRO({
-      //   name: name.value,
-      //   email: email.value,
-      //   password: password.value,
-      //   password_confirmation: password_confirmation.value,
-      // });
-      // const { response } = await request(url, options);
-      // if (response.ok) userLogin(name.value, password.value);
-    }
+    const { response } = await request(url, options);
+    if (response.ok) userLogin(name.value, password.value);
   }
 
   return (
