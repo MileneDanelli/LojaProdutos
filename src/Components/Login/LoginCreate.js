@@ -7,14 +7,15 @@ import { REGISTRO } from '../../api';
 import { UserContext } from '../../UserContext';
 import useFetch from '../../Hooks/useFetch';
 import Head from '../Helper/Head';
+import { useNavigate } from 'react-router';
 
 const LoginCreate = () => {
   const name = useForm();
   const email = useForm('email');
   const password = useForm('password');
   const password_confirmation = useForm('password');
-  const { userLogin } = React.useContext(UserContext);
   const { loading, error, request } = useFetch();
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -25,7 +26,7 @@ const LoginCreate = () => {
       password_confirmation: password_confirmation.value,
     });
     const { response } = await request(url, options);
-    if (response.ok) userLogin(name.value, password.value);
+    if (response.ok) navigate('/login');
   }
 
   return (

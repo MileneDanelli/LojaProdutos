@@ -3,14 +3,15 @@
   position: fixed;
   width: 100%;
   z-index: 100;
-  background: white;
   top: 0px;
+  background: #7fffd4;
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #7fffd4;
   height: 4rem;
 }
 
@@ -19,19 +20,13 @@
   height: 50px;
 }
 
-.login {
-  color: #333;
+.sair {
   display: flex;
-  align-items: center;
+  gap: 1rem;
 }
 
-.login::after {
-  content: '';
-  display: inline-block;
-  width: 14px;
-  height: 17px;
-  background: url('../Assets/carrinho.png') no-repeat center center;
-  margin-left: 0.5rem;
-  position: relative;
-  top: -1px;
+.botao_sair {
+  cursor: pointer;
+  width: 40px;
+  height: 30px;
 }

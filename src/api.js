@@ -19,8 +19,49 @@ export function LOGIN(body) {
     url: API_URL + '/login',
     options: {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       withCredentials: true,
       body: JSON.stringify(body),
+    },
+  };
+}
+
+export function LOGOUT(token) {
+  return {
+    url: API_URL + '/sair',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      withCredentials: true,
+    },
+  };
+}
+
+export function TOKEN_VALIDATE_POST(token) {
+  return {
+    url: API_URL + '/autologin',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      withCredentials: true,
+    },
+  };
+}
+
+export function USER_GET(token) {
+  return {
+    url: API_URL + '/user',
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     },
   };
 }
