@@ -1,5 +1,7 @@
 export const API_URL = 'http://127.0.0.1:8000/api';
+export const URL_IMAGE = 'http://127.0.0.1:8000';
 
+//Autenticação
 export function REGISTRO(body) {
   return {
     url: API_URL + '/registrar',
@@ -67,6 +69,7 @@ export function USER_GET(token) {
   };
 }
 
+// Produtos
 export function PRODUTOS_POST(formData, token) {
   return {
     url: API_URL + '/produtos',
@@ -74,9 +77,9 @@ export function PRODUTOS_POST(formData, token) {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data'
+        Accept: 'multipart/form-data',
       },
+
       withCredentials: true,
       body: formData,
     },
@@ -87,10 +90,10 @@ export function PRODUTO_PUT(formData, id, token) {
   return {
     url: `${API_URL}/produtos/${id}`,
     options: {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Accept: 'multipart/form-data',
       },
       withCredentials: true,
       body: formData,
@@ -127,6 +130,76 @@ export function PRODUTO_GET(id) {
 export function PRODUTO_DELETE(id) {
   return {
     url: `${API_URL}/produtos/${id}`,
+    options: {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+      },
+    },
+  };
+}
+
+// Categorias
+export function CATEGORIAS_POST(formData, token) {
+  return {
+    url: API_URL + '/categorias',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        Accept: 'multipart/form-data',
+      },
+
+      withCredentials: true,
+      body: formData,
+    },
+  };
+}
+
+export function CATEGORIA_PUT(formData, id, token) {
+  return {
+    url: `${API_URL}/categorias/${id}`,
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        Accept: 'multipart/form-data',
+      },
+      withCredentials: true,
+      body: formData,
+    },
+  };
+}
+
+export function CATEGORIAS_GET(token) {
+  return {
+    url: `${API_URL}/categorias`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
+
+export function CATEGORIA_GET(id) {
+  return {
+    url: `${API_URL}/categorias/${id}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+      headers: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+      },
+    },
+  };
+}
+
+export function CATEGORIA_DELETE(id) {
+  return {
+    url: `${API_URL}/categorias/${id}`,
     options: {
       method: 'DELETE',
       headers: {

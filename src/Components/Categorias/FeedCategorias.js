@@ -1,31 +1,31 @@
 import React from 'react';
 import useFetch from '../../Hooks/useFetch';
-import { PRODUTOS_GET } from '../../api';
+import { CATEGORIAS_GET } from '../../api';
 import Error from '../Helper/Error';
-import styles from './Feed.module.css';
-import Item from './Item';
+import styles from './FeedCategorias.module.css';
+import ItemCategoria from './ItemCategoria';
 
-const Feed = ({ user }) => {
+const FeedCategorias = ({ user }) => {
   const { data, error, request } = useFetch();
   React.useEffect(() => {
-    async function fetchProdutos() {
+    async function fetchCategorias() {
       const token = window.localStorage.getItem('token');
-      const { url, options } = PRODUTOS_GET(token);
+      const { url, options } = CATEGORIAS_GET(token);
       await request(url, options);
     }
-    fetchProdutos();
+    fetchCategorias();
   }, [request, user]);
 
   if (error) return <Error error={error} />;
   if (data)
     return (
       <ul className={`${styles.feed} animeLeft`}>
-        {data.map((produto) => (
-          <Item key={produto.id} produto={produto} />
+        {data.map((categoria) => (
+          <ItemCategoria key={categoria.id} categoria={categoria} />
         ))}
       </ul>
     );
   else return null;
 };
 
-export default Feed;
+export default FeedCategorias;

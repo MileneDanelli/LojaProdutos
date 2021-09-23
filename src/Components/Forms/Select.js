@@ -1,37 +1,37 @@
 import React from 'react';
+import { CATEGORIAS_GET } from '../../api';
+import useFetch from '../../Hooks/useFetch';
+import Error from '../Helper/Error';
+import styles from './Select.module.css';
 
-import Select from 'react-select';
-import { colourOptions, groupedOptions } from '../data';
+const Input = ({ label, name }) => {
+  const { data, error, request } = useFetch();
+  React.useEffect(() => {
+    async function fetchCategorias() {
+      const token = window.localStorage.getItem('token');
+      const { url, options } = CATEGORIAS_GET(token);
+      await request(url, options);
+    }
+    fetchCategorias();
+  }, [request]);
 
-const groupStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
+  if (error) return <Error error={error} />;
+  if (data)
+    return (
+      <div className={styles.wrapper}>
+        <label htmlFor={name} className={styles.label}>
+          {label}
+        </label>
+
+        <select name={name} className={styles.select}>
+          <option selected>...</option>
+          {data.map((categoria) => (
+            <option value={categoria.id}>{categoria.nome}</option>
+          ))}
+        </select>
+      </div>
+    );
+  else return null;
 };
-const groupBadgeStyles = {
-  backgroundColor: '#EBECF0',
-  borderRadius: '2em',
-  color: '#172B4D',
-  display: 'inline-block',
-  fontSize: 12,
-  fontWeight: 'normal',
-  lineHeight: '1',
-  minWidth: 1,
-  padding: '0.16666666666667em 0.5em',
-  textAlign: 'center',
-};
 
-const formatGroupLabel = (data) => (
-  <div style={groupStyles}>
-    <span>{data.label}</span>
-    <span style={groupBadgeStyles}>{data.options.length}</span>
-  </div>
-);
-
-export default () => (
-  <Select
-    defaultValue={colourOptions[1]}
-    options={groupedOptions}
-    formatGroupLabel={formatGroupLabel}
-  />
-);
+export default Input;

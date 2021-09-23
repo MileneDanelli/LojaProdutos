@@ -16,17 +16,27 @@
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
+  margin-top: 0.5rem;
+  width: 40px;
+  height: 40px;
 }
 
 .sair {
+  margin-top: 0.5rem;
   display: flex;
   gap: 1rem;
+  font-family: --type-second;
+  font-size: 1.5rem;
 }
 
 .botao_sair {
   cursor: pointer;
   width: 40px;
-  height: 30px;
+  height: 40px;
+}
+
+.secoes {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

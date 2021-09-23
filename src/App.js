@@ -8,6 +8,10 @@ import NotFound from './Components/NotFound';
 import Login from './Components/Login/Login';
 import ProtectedRoute from './Components/Helper/ProtectedRoute';
 import CadastroProduto from './Components/Produtos/CadastroProduto';
+import Produto from './Components/Produtos/Produto';
+import HomeCategorias from './Components/Categorias/HomeCategorias';
+import CadastroCategoria from './Components/Categorias/CadastroCategoria';
+import Categoria from './Components/Categorias/Categoria';
 
 function App() {
   return (
@@ -24,10 +28,13 @@ function App() {
                 path="/cadastro_produtos"
                 element={<CadastroProduto />}
               />
-              {/* 
-              <Route path="foto/:id" element={<Photo />} />
-              <Route path="perfil/:user" element={<UserProfile />} />
-              */}
+              <ProtectedRoute path="/produto/:id" element={<Produto />} />
+              <ProtectedRoute path="/categorias" element={<HomeCategorias />} />
+              <ProtectedRoute
+                path="/cadastro_categorias"
+                element={<CadastroCategoria />}
+              />
+              <ProtectedRoute path="/categoria/:id" element={<Categoria />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

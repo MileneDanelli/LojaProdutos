@@ -4,14 +4,12 @@ import useForm from '../../Hooks/useForm';
 import useFetch from '../../Hooks/useFetch';
 import Input from '../Forms/Input';
 import Button from '../Forms/Button';
-import Select from '../Forms/Select';
 import Error from '../Helper/Error';
-import { PRODUTOS_POST } from '../../api';
+import { PRODUTO_PUT } from '../../api';
 import { useNavigate } from 'react-router-dom';
 import Head from '../Helper/Head';
-import HeaderProdutos from './HeaderProdutos';
 
-const CadastroProduto = () => {
+const EdicaoProduto = (id) => {
   const nome = useForm();
   const id_categoria = useForm();
   const [imagem, setImagem] = React.useState({});
@@ -25,12 +23,13 @@ const CadastroProduto = () => {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData();
+    formData.append('_method', 'PUT');
     formData.append('imagem', imagem.raw);
     formData.append('nome', nome.value);
     formData.append('id_categoria', id_categoria.value);
 
     const token = window.localStorage.getItem('token');
-    const { url, options } = PRODUTOS_POST(formData, token);
+    const { url, options } = PRODUTO_PUT(formData, id.id, token);
     request(url, options);
   }
 
@@ -42,12 +41,17 @@ const CadastroProduto = () => {
   }
 
   return (
-    <section className="container animeLeft">
-      <Head title="Cadastrar" description="Cadastrar Produtos." />
-      <HeaderProdutos />
+    <section>
+      <Head title="Edição" description="Edição Produtos." />
+      <h1 className="title">Edição</h1>
       <form onSubmit={handleSubmit}>
         <Input label="Nome" type="text" name="nome" {...nome} />
-        <Select label="Categoria" name="id_categoria" />
+        <Input
+          label="Categoria"
+          type="text"
+          name="id_categoria"
+          {...id_categoria}
+        />
         <input
           className={styles.file}
           type="file"
@@ -74,4 +78,4 @@ const CadastroProduto = () => {
   );
 };
 
-export default CadastroProduto;
+export default EdicaoProduto;
