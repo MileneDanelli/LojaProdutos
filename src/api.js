@@ -48,6 +48,7 @@ export function TOKEN_VALIDATE_POST(token) {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
     },
@@ -73,6 +74,8 @@ export function PRODUTOS_POST(formData, token) {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data'
       },
       withCredentials: true,
       body: formData,
@@ -87,6 +90,7 @@ export function PRODUTO_PUT(formData, id, token) {
       method: 'PUT',
       headers: {
         Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
       body: formData,
