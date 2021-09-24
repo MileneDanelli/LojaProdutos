@@ -8,11 +8,13 @@ import Error from '../Helper/Error';
 import { PRODUTO_PUT } from '../../api';
 import { useNavigate } from 'react-router-dom';
 import Head from '../Helper/Head';
+import Select from '../Forms/Select';
 
 const EdicaoProduto = (id) => {
   const nome = useForm();
   const id_categoria = useForm();
   const [imagem, setImagem] = React.useState({});
+  const [selectValue, setSelectValue] = React.useState(null);
   const { data, error, loading, request } = useFetch();
   const navigate = useNavigate();
 
@@ -40,16 +42,21 @@ const EdicaoProduto = (id) => {
     });
   }
 
+  function handleSelectChange({ target }) {
+    setSelectValue(target.value);
+  }
+
   return (
     <section>
       <Head title="Edição" description="Edição Produtos." />
       <h1 className="title">Edição</h1>
       <form onSubmit={handleSubmit}>
         <Input label="Nome" type="text" name="nome" {...nome} />
-        <Input
+        <Select
           label="Categoria"
-          type="text"
           name="id_categoria"
+          onChange={handleSelectChange}
+          value={selectValue}
           {...id_categoria}
         />
         <input

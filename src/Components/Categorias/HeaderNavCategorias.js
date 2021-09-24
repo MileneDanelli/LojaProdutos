@@ -6,7 +6,7 @@ import styles from './HeaderNavCategorias.module.css';
 const HeaderNavCategorias = () => {
   return (
     <>
-      <nav activeClassName={styles.nav}>
+      <nav>
         <NavLink to="/cadastro_categorias" end>
           <img className={styles.imagem} src={cadastrar} alt="Cadastrar" />
         </NavLink>

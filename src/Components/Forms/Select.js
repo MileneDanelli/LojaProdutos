@@ -4,7 +4,7 @@ import useFetch from '../../Hooks/useFetch';
 import Error from '../Helper/Error';
 import styles from './Select.module.css';
 
-const Input = ({ label, name }) => {
+const Select = ({ label, name, onChange, value }) => {
   const { data, error, request } = useFetch();
   React.useEffect(() => {
     async function fetchCategorias() {
@@ -23,10 +23,17 @@ const Input = ({ label, name }) => {
           {label}
         </label>
 
-        <select name={name} className={styles.select}>
-          <option selected>...</option>
+        <select
+          name={name}
+          className={styles.select}
+          onChange={onChange}
+          value={value}
+        >
+          <option defaultValue>...</option>
           {data.map((categoria) => (
-            <option value={categoria.id}>{categoria.nome}</option>
+            <option key={categoria.id} value={categoria.id}>
+              {categoria.nome}
+            </option>
           ))}
         </select>
       </div>
@@ -34,4 +41,4 @@ const Input = ({ label, name }) => {
   else return null;
 };
 
-export default Input;
+export default Select;

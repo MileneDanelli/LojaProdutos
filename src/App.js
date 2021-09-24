@@ -23,13 +23,16 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/login/*" element={<Login />} />
-              <ProtectedRoute path="/produtos" element={<Home />} />
+              <ProtectedRoute path="/produtos/*" element={<Home />} />
               <ProtectedRoute
                 path="/cadastro_produtos"
                 element={<CadastroProduto />}
               />
               <ProtectedRoute path="/produto/:id" element={<Produto />} />
-              <ProtectedRoute path="/categorias" element={<HomeCategorias />} />
+              <ProtectedRoute
+                path="/categorias/*"
+                element={<HomeCategorias />}
+              />
               <ProtectedRoute
                 path="/cadastro_categorias"
                 element={<CadastroCategoria />}

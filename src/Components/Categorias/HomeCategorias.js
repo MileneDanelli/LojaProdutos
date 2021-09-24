@@ -13,7 +13,7 @@ const Home = () => {
       <HeaderCategorias />
       <Routes>
         <Route path="/" element={<FeedCategorias />} />
-        <Route path="/cadastro_categorias" element={<CadastroCategoria />} />
+        <Route path="cadastro_categorias/*" element={<CadastroCategoria />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </section>

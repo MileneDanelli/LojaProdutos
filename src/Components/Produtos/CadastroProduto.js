@@ -15,6 +15,7 @@ const CadastroProduto = () => {
   const nome = useForm();
   const id_categoria = useForm();
   const [imagem, setImagem] = React.useState({});
+  const [selectValue, setSelectValue] = React.useState(null);
   const { data, error, loading, request } = useFetch();
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ const CadastroProduto = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     const formData = new FormData();
     formData.append('imagem', imagem.raw);
     formData.append('nome', nome.value);
@@ -41,13 +43,25 @@ const CadastroProduto = () => {
     });
   }
 
+  function handleSelectChange({ target }) {
+    setSelectValue(target.value);
+  }
+
   return (
     <section className="container animeLeft">
       <Head title="Cadastrar" description="Cadastrar Produtos." />
       <HeaderProdutos />
       <form onSubmit={handleSubmit}>
         <Input label="Nome" type="text" name="nome" {...nome} />
-        <Select label="Categoria" name="id_categoria" />
+
+        <Select
+          label="Categoria"
+          name="id_categoria"
+          onChange={handleSelectChange}
+          value={selectValue}
+          {...id_categoria}
+        />
+
         <input
           className={styles.file}
           type="file"
